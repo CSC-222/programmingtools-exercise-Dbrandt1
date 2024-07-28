@@ -2,9 +2,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
 
-/**Enter your name here**/
+/**My Name: Daniella Brandt**/
 
 public class ChainReactionMain {
 
@@ -90,7 +93,25 @@ public class ChainReactionMain {
     }
 
     public static void cleanData(ArrayList<ArrayList<String>> wordSets){
-	/**Add Code here to clean dataset**/
+	/**Add Code here to clean data set**/
+        //my code to clean dataset.....
+        //here im creating a Set!, to store all the words, that comes as 1st word in 
+        //every row.....
+        Set<String>First_word=new HashSet<>();
+        //start iterating over loop
+        for(ArrayList<String> row : wordSets){
+            if(!row.isEmpty()){
+                //adding first words in the created set here...... if the row is not empty only!!!!!!!
+                First_word.add(row.get(0));
+            }
+        }
+        //now here i'm iterating over the loop of words Set to remove Invalid words......
+       for (ArrayList<String> row : wordSets) {
+            row.removeIf(word -> !First_word.contains(word));
+        }
+
+       //here, I'm removing a row, that has or include onlky the one 'Valid' word!!!!!!!
+       wordSets.removeIf(row -> row.size() <=1);	  
 	    
         validate(wordSets);
     }
